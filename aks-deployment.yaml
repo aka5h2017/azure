@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-app-deplyment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-back
+  template:
+    metadata:
+      labels:
+        app: rest-back
+    spec:
+      containers:
+      - name: rest
+        image: myacrtutorial.azurecr.io/rest:v2
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-vote-back
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: rest-back
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-back
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+  selector:
+    app: rest-back
