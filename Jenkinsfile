@@ -5,8 +5,8 @@ node {
 	}
 	
 	stage('compile') {
-		./gradlew clean
-		./gradlew bootJar
+		bat './gradlew clean'
+		bat './gradlew bootJar'
 	}
 	
 }
